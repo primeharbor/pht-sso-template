@@ -1,0 +1,4 @@
+
+# key should be ${env}_aws_sso.tfstate
+bucket="org-kickstart-ENTERIDHERE"
+key="ENV_aws_sso.tfstate"
