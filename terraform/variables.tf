@@ -12,6 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# key should be ${env}_aws_sso.tfstate
-bucket="org-kickstart-ENTERIDHERE"
-key="ENV_aws_sso.tfstate"
+
+variable "default_session_duration" {
+  description = "Session Duration (PT8H)"
+  type = string
+  default = "PT8H"
+}
+
+variable "sso_assignments" {
+  description = "Map of all the AWS Account Assignments"
+  default = {}
+}
+
+variable "groups" {
+  description = "Map of Identity Center Groups to create manually (not via SCIM)"
+  default = {}
+}
+
+variable "include_root" {
+  description = "Include the Org Management account when using the account id keywork 'ALL' "
+  type    = bool
+  default = false
+}

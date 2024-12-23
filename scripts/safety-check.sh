@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copyright 2024 Chris Farris <chris@primeharbor.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# key should be ${env}_aws_sso.tfstate
-bucket="org-kickstart-ENTERIDHERE"
-key="ENV_aws_sso.tfstate"
+ACTIVE_ENV=`cat terraform/.terraform/terraform.tfstate | jq -r .backend.config.key | cut -d'.' -f 1`
+
+if [[ "$ACTIVE_ENV" != "$1" ]] ; then
+	echo "terraform is configured for team $ACTIVE_ENV - expecting $1 - Aborting...."
+	exit 1
+else
+	exit 0
+fi

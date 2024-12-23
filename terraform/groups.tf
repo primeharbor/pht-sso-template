@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# key should be ${env}_aws_sso.tfstate
-bucket="org-kickstart-ENTERIDHERE"
-key="ENV_aws_sso.tfstate"
+resource "aws_identitystore_group" "manual_created_group" {
+  for_each          = var.groups
+  display_name      = each.value["display_name"]
+  description       = each.value["description"]
+  identity_store_id = local.identity_store_id
+}

@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "trustedAdvisor:*",
+                "health:*",
+                "aws-portal:View*",
+                "guardduty:*",
+                "macie:*",
+                "inspector:*",
+                "support:*",
+                "securityhub:*",
+                "ce:*",
+                "iam:Simulate*",
+                "account:*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        }
+    ]
+}

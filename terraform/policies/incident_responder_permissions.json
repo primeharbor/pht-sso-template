@@ -1,0 +1,99 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "iam:Simulate*",
+            "Resource": "*",
+            "Effect": "Allow",
+            "Sid": "IAMSimulateResources"
+        },
+        {
+            "Action": [
+                "access-analyzer:*",
+                "athena:*",
+                "aws-portal:View*",
+                "ce:*",
+                "guardduty:*",
+                "health:*",
+                "inspector:*",
+                "macie2:Get*",
+                "macie2:List*",
+                "macie2:Describe*",
+                "pricing:GetProducts",
+                "glue:*",
+                "securityhub:*",
+                "support:*",
+                "trustedAdvisor:*",
+                "s3:*",
+                "sts:DecodeAuthorizationMessage",
+                "ec2-instance-connect:*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Sid": "SecurityAuditTools"
+        },
+        {
+            "Action": [
+                "ec2:CopySnapshot",
+                "ec2:CreateSnapshot",
+                "ec2:CreateSnapshots",
+                "ec2:DeleteSnapshot",
+                "ec2:ModifySnapshotAttribute",
+                "ec2:AttachVolume",
+                "ec2:CreateVolume",
+                "ec2:DeleteVolume",
+                "ec2:DetachVolume",
+                "ec2:ModifyVolume",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:RebootInstances",
+                "ec2:MonitorInstances",
+                "ec2:UnmonitorInstances",
+                "ec2:CreateTags"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Sid": "EvidenceCollection"
+        },
+        {
+            "Action": [
+                "ec2:CreateSecurityGroup",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:ModifySecurityGroupRules",
+                "ec2:ModifyInstanceMetadataOptions",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "ec2:StopInstances",
+                "iam:UpdateAccessKey",
+                "iam:PutRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:DeleteRolePolicy",
+                "wafv2:*",
+                "elasticloadbalancing:SetWebACL"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Sid": "Containment"
+        },
+        {
+            "Action": [
+                "cloudshell:*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Sid": "CloudShell"
+        },
+        {
+            "Action": [
+                "backup:StartRestoreJob",
+                "iam:PassRole"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Sid": "AWSBackup"
+        }
+    ]
+}
