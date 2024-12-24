@@ -26,4 +26,6 @@ module "permission_set_assignment" {
   managed_policy_arns = lookup(each.value, "managed_policy_arns", [])
   aws_account_ids     = each.value["aws_account_ids"] == ["ALL"] ? local.active_account_ids : each.value["aws_account_ids"]
   target_ou_name      = lookup(each.value, "target_ou_name", null)
+  permission_boundary = lookup(each.value, "permission_boundary", var.default_permissions_boundary_policy_name)
+  relay_state         = lookup(each.value, "relay_state", null)
 }

@@ -19,7 +19,7 @@ resource "aws_ssoadmin_permission_set" "permission_set" {
   name             = var.permission_set_name
   description      = var.description
   instance_arn     = local.instance_arn
-  relay_state      = "https://s3.console.aws.amazon.com/s3/home?region=us-east-1#"
+  relay_state      = var.relay_state
   session_duration = var.session_duration
 
 }
@@ -38,4 +38,33 @@ resource "aws_ssoadmin_managed_policy_attachment" "managed_policy_attachments" {
   instance_arn       = local.instance_arn
   permission_set_arn = aws_ssoadmin_permission_set.permission_set.arn
   managed_policy_arn = each.value
+}
+
+# You can have either a customer or aws managed boundary (but not both)
+# customer managed boundaries must exist and are specified by name
+# aws managed boundaries start with arn:
+locals {
+  managed_boundary  = var.permission_boundary != "" && startswith(var.permission_boundary, "arn:")
+  customer_boundary = var.permission_boundary != "" && !startswith(var.permission_boundary, "arn:")
+}
+
+resource "aws_ssoadmin_permissions_boundary_attachment" "customer_boundary" {
+  count              = local.customer_boundary ? 1 : 0
+  instance_arn       = local.instance_arn
+  permission_set_arn = aws_ssoadmin_permission_set.permission_set.arn
+  permissions_boundary {
+    customer_managed_policy_reference {
+      name = var.permission_boundary
+      path = "/"
+    }
+  }
+}
+
+resource "aws_ssoadmin_permissions_boundary_attachment" "aws_managed_boundary" {
+  count              = local.managed_boundary ? 1 : 0
+  instance_arn       = local.instance_arn
+  permission_set_arn = aws_ssoadmin_permission_set.permission_set.arn
+  permissions_boundary {
+    managed_policy_arn = var.permission_boundary
+  }
 }

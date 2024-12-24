@@ -48,6 +48,12 @@ variable "session_duration" {
   default     = "PT8H"
 }
 
+variable "permission_boundary" {
+  description = "If set, this policy (name for customer-managed or arn for aws-mananged) will applied as a permission boundary. The a customer policy must already exist in assigned accounts."
+  type        = string
+  default     = ""
+}
+
 variable "json_policy_file" {
   description = "(optional) Path to a custom json file with special policy statements"
   type        = string

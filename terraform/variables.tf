@@ -15,22 +15,28 @@
 
 variable "default_session_duration" {
   description = "Session Duration (PT8H)"
-  type = string
-  default = "PT8H"
+  type        = string
+  default     = "PT8H"
+}
+
+variable "default_permissions_boundary_policy_name" {
+  description = "If set, this policy (name) will applied as a permission boundary to all assignments. The Policy must exist in assigned accounts."
+  type        = string
+  default     = ""
 }
 
 variable "sso_assignments" {
   description = "Map of all the AWS Account Assignments"
-  default = {}
+  default     = {}
 }
 
 variable "groups" {
   description = "Map of Identity Center Groups to create manually (not via SCIM)"
-  default = {}
+  default     = {}
 }
 
 variable "include_root" {
   description = "Include the Org Management account when using the account id keywork 'ALL' "
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
 }
