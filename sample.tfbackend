@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# key should be ${env}_aws_sso.tfstate
+
+# There is a safety check to ensure that the tfstate file and env=
+# passed to make match. This means that the tfstate must be $env.tfstate
+# however you can place the file in it's own prefix
 bucket="org-kickstart-ENTERIDHERE"
-key="ENV_aws_sso.tfstate"
+key="pht-sso/ENV.tfstate"

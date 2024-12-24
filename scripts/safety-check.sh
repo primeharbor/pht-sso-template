@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ACTIVE_ENV=`cat terraform/.terraform/terraform.tfstate | jq -r .backend.config.key | cut -d'.' -f 1`
+ACTIVE_ENV=`cat terraform/.terraform/terraform.tfstate | jq -r .backend.config.key | cut -d'.' -f 1 | awk -F / '{print $NF}'`
 
 if [[ "$ACTIVE_ENV" != "$1" ]] ; then
 	echo "terraform is configured for team $ACTIVE_ENV - expecting $1 - Aborting...."
